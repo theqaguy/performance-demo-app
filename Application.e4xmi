@@ -13,6 +13,7 @@
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_6wlLisgZEeSyMNYR5xypkQ" elementId="file" label="File">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLi8gZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.file.open" label="Open" iconURI="platform:/plugin/de.geyer-tobias.performance.demoapp/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_YgcA4G1WEeacs6Ul-gicEg" elementId="de.geyer-tobias.performance.demoapp.handledmenuitem.import" label="Import" command="_qCs9wG1WEeacs6Ul-gicEg"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjMgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.save" label="Save" iconURI="platform:/plugin/de.geyer-tobias.performance.demoapp/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjcgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.quit" label="Quit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
       </children>
@@ -31,6 +32,7 @@
   <handlers xmi:id="_6wlLgcgZEeSyMNYR5xypkQ" elementId="de.geyertobias.performance.demoapp.handler.openCommand" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.handlers.OpenHandler" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLhMgZEeSyMNYR5xypkQ" elementId="de.geyertobias.performance.demoapp.handler.saveCommand" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.handlers.SaveHandler" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
   <handlers xmi:id="_6wlLh8gZEeSyMNYR5xypkQ" elementId="de.geyertobias.performance.demoapp.handler.aboutCommand" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.handlers.AboutHandler" command="_6wlLhsgZEeSyMNYR5xypkQ"/>
+  <handlers xmi:id="_vKuAcG1WEeacs6Ul-gicEg" elementId="de.geyer-tobias.performance.demoapp.handler.0" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.handlers.ImportHandler" command="_qCs9wG1WEeacs6Ul-gicEg"/>
   <bindingTables xmi:id="_6wlLfsgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.bindingtable" bindingContext="_6wlLecgZEeSyMNYR5xypkQ">
     <bindings xmi:id="_6wlLf8gZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.keybinding.m1q" keySequence="M1+Q" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
     <bindings xmi:id="_6wlLgsgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.keybinding.m1o" keySequence="M1+O" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
@@ -45,6 +47,7 @@
   <commands xmi:id="_6wlLgMgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.open" commandName="openCommand"/>
   <commands xmi:id="_6wlLg8gZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.file.save" commandName="saveCommand"/>
   <commands xmi:id="_6wlLhsgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.help.aboutAction" commandName="aboutCommand"/>
+  <commands xmi:id="_qCs9wG1WEeacs6Ul-gicEg" elementId="de.geyer-tobias.performance.demoapp.command.importcommand" commandName="importCommand"/>
   <addons xmi:id="_6wlLcsgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_6wlLc8gZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_6wlLdMgZEeSyMNYR5xypkQ" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

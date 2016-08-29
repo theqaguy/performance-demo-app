@@ -1,9 +1,9 @@
 package de.geyertobias.performance.demoapp.parts;
 
-import java.util.Arrays;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
@@ -16,9 +16,12 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-public class SamplePart {
+import de.geyertobias.performance.demoapp.model.ModelProvider;
+
+public class SamplePart implements ChangeListener {
 
 	private Text txtInput;
 	private TableViewer tableViewer;
@@ -42,9 +45,27 @@ public class SamplePart {
 
 		tableViewer = new TableViewer(parent);
 
-		tableViewer.setContentProvider(ArrayContentProvider.getInstance());;
-		tableViewer.setInput(createInitialDataModel());
+		// ContentProvider cp = new ContentProvider();
+
+		tableViewer.setContentProvider(new ArrayContentProvider());
+		tableViewer.setInput(ModelProvider.INSTANCE.getAddresses());
+		// cp.getElements(tableViewer));
+
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+		
+		ModelProvider.INSTANCE.addChangeListener(this);
+	}
+
+	public TableViewer getViewer() {
+		return tableViewer;
+	}
+
+	private void refresh() {
+		tableViewer.refresh();
+		Table table = tableViewer.getTable();
+		for (int i = 0, n = table.getColumnCount(); i < n; i++) {
+			table.getColumn(i).pack();
+		}
 	}
 
 	@Focus
@@ -56,8 +77,9 @@ public class SamplePart {
 	public void save() {
 		dirty.setDirty(false);
 	}
-	
-	private List<String> createInitialDataModel() {
-		return Arrays.asList("Sample item 1", "Sample item 2", "Sample item 3", "Sample item 4", "Sample item 5");
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		refresh();
 	}
 }
