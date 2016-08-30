@@ -13,8 +13,58 @@ public class CSVImporter {
 	ArrayList<String> csvLines;
 	ArrayList<String[]> parsedLines;
 	ArrayList<String> debugOutput = new ArrayList<>();
+	boolean causeOOME = false;
+	boolean highCPUload = false;
 	
+	public CSVImporter(boolean causeOOME, boolean highCPUload) {
+		this.causeOOME = causeOOME;
+		this.highCPUload = highCPUload;
+	}
+
 	public void importFile(String selectedFile, ModelProvider modelProvider) {
+		if(causeOOME) {
+			importFileWithOOME(selectedFile, modelProvider);
+		} else if (highCPUload) {
+			importFileWithoutOOME(selectedFile, modelProvider);
+		} else {
+			importFileHighPerformance(selectedFile, modelProvider);
+		}
+	}
+	
+	private void importFileHighPerformance(String selectedFile, ModelProvider modelProvider) {
+		try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		    	String[] parsedLine = parseLine(line);
+				if(parsedLine.length==4) {
+					modelProvider.addAddressWithoutUIUpdate(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
+					modelProvider.refreshUI();
+				}
+		    }
+		} catch (IOException e) {
+			System.out.println("Reading the file failed with an exception:");
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace().toString());
+		}		
+	}
+	
+	private void importFileWithoutOOME(String selectedFile, ModelProvider modelProvider) {
+		try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		    	String[] parsedLine = parseLine(line);
+				if(parsedLine.length==4) {
+					modelProvider.addAddress(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
+				}
+		    }
+		} catch (IOException e) {
+			System.out.println("Reading the file failed with an exception:");
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace().toString());
+		}
+	}
+	
+	private void importFileWithOOME(String selectedFile, ModelProvider modelProvider) {
 		addDebugOutput("Starting import of file "+selectedFile);
 		addDebugOutput("Setting up List for csv Lines");
 		csvLines = new ArrayList<>();
@@ -56,7 +106,6 @@ public class CSVImporter {
 
 	private void addDebugOutput(String string) {
 		debugOutput.add(new Date().toString()+ " - "+string);
-		
 	}
 
 	String[] parseLine(String line) {

@@ -35,6 +35,17 @@ public enum ModelProvider {
 			  listener.stateChanged(new ChangeEvent("refresh"));
 		  }
 	  }
+
+	  public void addAddressWithoutUIUpdate(String firstname, String lastname, String gender, boolean married) {
+		  addresses.add(new Address(firstname, lastname, gender, married));
+	  }
+	  
+	  public void refreshUI() {
+		  for(ChangeListener listener: changeListeners) {
+			  listener.stateChanged(new ChangeEvent("refresh"));
+		  }
+	  }
+
 	  
 	  public void addChangeListener(ChangeListener changeListener) {
 		  changeListeners.add(changeListener);

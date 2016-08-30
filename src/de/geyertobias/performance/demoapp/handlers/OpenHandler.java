@@ -17,7 +17,9 @@ public class OpenHandler {
 		
 		if (selectedFile != null) {
 			// start import of CSV file
-			CSVImporter csvImporter = new CSVImporter();
+//			CSVImporter csvImporter = new CSVImporter(true, true);
+//			CSVImporter csvImporter = new CSVImporter(false, true);
+			CSVImporter csvImporter = new CSVImporter(false, false);
 			csvImporter.importFile(selectedFile, ModelProvider.INSTANCE);
 		}
 	}
