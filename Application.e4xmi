@@ -13,7 +13,6 @@
     <mainMenu xmi:id="_6wlLicgZEeSyMNYR5xypkQ" elementId="org.eclipse.ui.main.menu">
       <children xsi:type="menu:Menu" xmi:id="_6wlLisgZEeSyMNYR5xypkQ" elementId="file" label="File">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLi8gZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.file.open" label="Open" iconURI="platform:/plugin/de.geyer-tobias.performance.demoapp/icons/sample.png" command="_6wlLgMgZEeSyMNYR5xypkQ"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_YgcA4G1WEeacs6Ul-gicEg" elementId="de.geyer-tobias.performance.demoapp.handledmenuitem.import" label="Import" command="_qCs9wG1WEeacs6Ul-gicEg"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjMgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.save" label="Save" iconURI="platform:/plugin/de.geyer-tobias.performance.demoapp/icons/save_edit.png" command="_6wlLg8gZEeSyMNYR5xypkQ"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_6wlLjcgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.handleditem.quit" label="Quit" command="_6wlLfMgZEeSyMNYR5xypkQ"/>
       </children>

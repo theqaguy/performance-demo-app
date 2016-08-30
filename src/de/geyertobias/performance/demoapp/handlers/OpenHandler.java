@@ -3,11 +3,22 @@ package de.geyertobias.performance.demoapp.handlers;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
+
+import de.geyertobias.performance.demoapp.internal.CSVImporter;
+import de.geyertobias.performance.demoapp.model.ModelProvider;
 public class OpenHandler {
 
 	@Execute
 	public void execute(Shell shell){
 		FileDialog dialog = new FileDialog(shell);
-		dialog.open();
+		dialog.setText("Select CSV file");
+		dialog.setFilterExtensions(new String[] {"*.csv"});
+		String selectedFile = dialog.open();
+		
+		if (selectedFile != null) {
+			// start import of CSV file
+			CSVImporter csvImporter = new CSVImporter();
+			csvImporter.importFile(selectedFile, ModelProvider.INSTANCE);
+		}
 	}
 }
