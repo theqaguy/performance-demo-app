@@ -5,7 +5,7 @@
       <children xsi:type="advanced:Perspective" xmi:id="_6wlLkcgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.perspective.sample">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.partsashcontainer.sample">
           <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.partstack.sample">
-            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.part.sample" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.parts.SamplePart" label="Sample Part"/>
+            <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.part.sample" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.parts.AddressListPart" label="Address List"/>
           </children>
         </children>
       </children>

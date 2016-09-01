@@ -14,13 +14,6 @@ public enum ModelProvider {
 
 	  private ModelProvider() {
 	    addresses = new ArrayList<Address>();
-	    // Image here some fancy database access to read the persons and to
-	    // put them into the model
-	    addresses.add(new Address("Rainer", "Zufall", "male", true));
-	    addresses.add(new Address("Reiner", "Babbel", "male", true));
-	    addresses.add(new Address("Marie", "Dortmund", "female", false));
-	    addresses.add(new Address("Holger", "Adams", "male", true));
-	    addresses.add(new Address("Juliane", "Adams", "female", true));
 	    
 	    changeListeners = new ArrayList<ChangeListener>();
 	  }

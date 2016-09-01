@@ -10,7 +10,9 @@ import javax.swing.event.ChangeListener;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -24,7 +26,7 @@ import de.geyertobias.performance.demoapp.internal.ContentProvider;
 import de.geyertobias.performance.demoapp.model.Address;
 import de.geyertobias.performance.demoapp.model.ModelProvider;
 
-public class SamplePart implements ChangeListener {
+public class AddressListPart implements ChangeListener {
 
 	private Text txtInput;
 	private TableViewer tableViewer;
@@ -47,10 +49,11 @@ public class SamplePart implements ChangeListener {
 		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		tableViewer = new TableViewer(parent, SWT.VIRTUAL);
-
-		// ContentProvider cp = new ContentProvider();
-
-//		tableViewer.setContentProvider(new ArrayContentProvider());
+		
+		createColumns();
+		tableViewer.getTable().setHeaderVisible(true);
+		tableViewer.getTable().setLinesVisible(true); 
+		
 		tableViewer.setContentProvider(new ContentProvider(tableViewer));
 
 		// special settings for the lazy content provider
@@ -59,11 +62,45 @@ public class SamplePart implements ChangeListener {
 		List<Address> addresses = ModelProvider.INSTANCE.getAddresses();
 		tableViewer.setInput(addresses);
 		tableViewer.setItemCount(addresses.size()); 
-		// cp.getElements(tableViewer));
 
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		ModelProvider.INSTANCE.addChangeListener(this);
+	}
+
+	private void createColumns() {
+		TableViewerColumn colFirstName = new TableViewerColumn(tableViewer, SWT.NONE);
+		colFirstName.getColumn().setWidth(200);
+		colFirstName.getColumn().setText("Firstname");
+		colFirstName.setLabelProvider(new ColumnLabelProvider() {
+		  @Override
+		  public String getText(Object element) {
+		    Address p = (Address) element;
+		    return p.getFirstName();
+		  }
+		});		
+		
+		TableViewerColumn colLastName = new TableViewerColumn(tableViewer, SWT.NONE);
+		colLastName.getColumn().setWidth(200);
+		colLastName.getColumn().setText("Lastname");
+		colLastName.setLabelProvider(new ColumnLabelProvider() {
+		  @Override
+		  public String getText(Object element) {
+		    Address p = (Address) element;
+		    return p.getLastName();
+		  }
+		});	
+		
+		TableViewerColumn colGender = new TableViewerColumn(tableViewer, SWT.NONE);
+		colGender.getColumn().setWidth(200);
+		colGender.getColumn().setText("Gender");
+		colGender.setLabelProvider(new ColumnLabelProvider() {
+		  @Override
+		  public String getText(Object element) {
+		    Address p = (Address) element;
+		    return p.getGender();
+		  }
+		});	
 	}
 
 	public TableViewer getViewer() {

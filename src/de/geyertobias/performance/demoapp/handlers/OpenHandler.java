@@ -4,7 +4,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import de.geyertobias.performance.demoapp.internal.CSVImporter;
+import de.geyertobias.performance.demoapp.internal.CSVLoader;
 import de.geyertobias.performance.demoapp.model.ModelProvider;
 public class OpenHandler {
 
@@ -17,10 +17,13 @@ public class OpenHandler {
 		
 		if (selectedFile != null) {
 			// start import of CSV file
+			// STEP 1: OOME
 //			CSVImporter csvImporter = new CSVImporter(true, true);
+			// STEP 2: CPU Load
 //			CSVImporter csvImporter = new CSVImporter(false, true);
-			CSVImporter csvImporter = new CSVImporter(false, false);
-			csvImporter.importFile(selectedFile, ModelProvider.INSTANCE);
+			// STEP 3: All is well
+			CSVLoader csvLoader = new CSVLoader(false, false);
+			csvLoader.loadFile(selectedFile, ModelProvider.INSTANCE);
 		}
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Date;
 
 import de.geyertobias.performance.demoapp.model.ModelProvider;
 
-public class CSVImporter {
+public class CSVLoader {
 
 	ArrayList<String> csvLines;
 	ArrayList<String[]> parsedLines;
@@ -16,12 +16,12 @@ public class CSVImporter {
 	boolean causeOOME = false;
 	boolean highCPUload = false;
 	
-	public CSVImporter(boolean causeOOME, boolean highCPUload) {
+	public CSVLoader(boolean causeOOME, boolean highCPUload) {
 		this.causeOOME = causeOOME;
 		this.highCPUload = highCPUload;
 	}
 
-	public void importFile(String selectedFile, ModelProvider modelProvider) {
+	public void loadFile(String selectedFile, ModelProvider modelProvider) {
 		modelProvider.clearAddresses();
 		if(causeOOME) {
 			importFileWithOOME(selectedFile, modelProvider);
