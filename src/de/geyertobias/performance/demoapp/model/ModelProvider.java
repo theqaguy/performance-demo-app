@@ -51,4 +51,8 @@ public enum ModelProvider {
 		  changeListeners.add(changeListener);
 	  }
 
+	public void clearAddresses() {
+		addresses = new ArrayList<>();
+	}
+
 }

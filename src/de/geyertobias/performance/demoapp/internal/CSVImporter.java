@@ -22,6 +22,7 @@ public class CSVImporter {
 	}
 
 	public void importFile(String selectedFile, ModelProvider modelProvider) {
+		modelProvider.clearAddresses();
 		if(causeOOME) {
 			importFileWithOOME(selectedFile, modelProvider);
 		} else if (highCPUload) {
@@ -38,7 +39,6 @@ public class CSVImporter {
 		    	String[] parsedLine = parseLine(line);
 				if(parsedLine.length==4) {
 					modelProvider.addAddressWithoutUIUpdate(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
-					modelProvider.refreshUI();
 				}
 		    }
 		} catch (IOException e) {
@@ -46,6 +46,7 @@ public class CSVImporter {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace().toString());
 		}		
+		modelProvider.refreshUI();
 	}
 	
 	private void importFileWithoutOOME(String selectedFile, ModelProvider modelProvider) {
@@ -55,6 +56,7 @@ public class CSVImporter {
 		    	String[] parsedLine = parseLine(line);
 				if(parsedLine.length==4) {
 					modelProvider.addAddress(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
+					modelProvider.refreshUI();
 				}
 		    }
 		} catch (IOException e) {
@@ -98,10 +100,11 @@ public class CSVImporter {
 			addDebugOutput("Checking if line "+i+" was parsed correctly");
 			if(parsedLine.length==4) {
 				addDebugOutput("Adding line "+i+" to model - parameters: "+parsedLine[0]+", "+parsedLine[1]+", "+parsedLine[2]+", "+parsedLine[3]);
-				modelProvider.addAddress(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
+				modelProvider.addAddressWithoutUIUpdate(parsedLine[0], parsedLine[1], parsedLine[2], Boolean.getBoolean(parsedLine[3]));
 			}
 			i++;
 		}
+		modelProvider.refreshUI();
 	}
 
 	private void addDebugOutput(String string) {

@@ -1,17 +1,29 @@
 package de.geyertobias.performance.demoapp.internal;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.ILazyContentProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 
-public class ContentProvider implements IStructuredContentProvider {
+import de.geyertobias.performance.demoapp.model.Address;
 
-	private List entries = Arrays.asList("Sample item 1", "Sample item 2", "Sample item 3", "Sample item 4", "Sample item 5");
-	
-	@Override
-	public Object[] getElements(Object inputElement) {
-		return entries.toArray();
-	}
+public class ContentProvider implements ILazyContentProvider {
+  private TableViewer viewer;
+  private List<Address> elements;
 
-}
+  public ContentProvider(TableViewer viewer) {
+    this.viewer = viewer;
+  }
+
+  public void dispose() {
+  }
+
+  public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+    this.elements = (List<Address>) newInput;
+  }
+
+  public void updateElement(int index) {
+    viewer.replace(elements.get(index), index);
+  }
+} 
