@@ -17,12 +17,7 @@ public class OpenHandler {
 		
 		if (selectedFile != null) {
 			// start import of CSV file
-			// STEP 1: OOME
-//			CSVImporter csvImporter = new CSVImporter(true, true);
-			// STEP 2: CPU Load
-//			CSVImporter csvImporter = new CSVImporter(false, true);
-			// STEP 3: All is well
-			CSVLoader csvLoader = new CSVLoader(false, false);
+			CSVLoader csvLoader = new CSVLoader();
 			csvLoader.loadFile(selectedFile, ModelProvider.INSTANCE);
 		}
 	}
