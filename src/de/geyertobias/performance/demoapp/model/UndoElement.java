@@ -5,17 +5,18 @@ import java.util.List;
 public class UndoElement {
 
 	private List<Address> previousState;
-	private Address addressToRemove;
+	private int hashCodeToRemove;
 	private String toString;
 
 	public UndoElement(List<Address> addresses, Address toRemove) {
 		previousState = addresses;
-		addressToRemove = toRemove;
+		hashCodeToRemove = toRemove.hashCode();
 		StringBuilder sb = new StringBuilder();
 		for(Address address: addresses) {
 			sb.append("["+address.getFirstName()+",");
 			sb.append(address.getLastName()+",");
 			sb.append(address.getGender()+",");
+			sb.append(address.getAge()+",");
 			sb.append(address.isMarried()+"]");
 		}
 		toString = sb.toString();
@@ -23,7 +24,7 @@ public class UndoElement {
 
 	public UndoElement(Address address) {
 		previousState = null;
-		addressToRemove = address;
+		hashCodeToRemove = address.hashCode();
 		toString = address.toString();
 	}
 
@@ -31,8 +32,8 @@ public class UndoElement {
 		return previousState;
 	}
 	
-	public Address getAddressToRemove() {
-		return addressToRemove;
+	public int getHashCodeToRemove() {
+		return hashCodeToRemove;
 	}
 
 	public String toString() {
