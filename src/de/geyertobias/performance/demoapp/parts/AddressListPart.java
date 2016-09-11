@@ -14,13 +14,10 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.Text;
 
 import de.geyertobias.performance.demoapp.internal.ContentProvider;
 import de.geyertobias.performance.demoapp.model.Address;
@@ -28,7 +25,6 @@ import de.geyertobias.performance.demoapp.model.ModelProvider;
 
 public class AddressListPart implements ChangeListener {
 
-	private Text txtInput;
 	private TableViewer tableViewer;
 
 	@Inject
@@ -37,16 +33,6 @@ public class AddressListPart implements ChangeListener {
 	@PostConstruct
 	public void createComposite(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-
-		txtInput = new Text(parent, SWT.BORDER);
-		txtInput.setMessage("Enter text to mark part as dirty");
-		txtInput.addModifyListener(new ModifyListener() {
-			@Override
-			public void modifyText(ModifyEvent e) {
-				dirty.setDirty(true);
-			}
-		});
-		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		tableViewer = new TableViewer(parent, SWT.VIRTUAL);
 		
@@ -70,7 +56,7 @@ public class AddressListPart implements ChangeListener {
 
 	private void createColumns() {
 		TableViewerColumn colFirstName = new TableViewerColumn(tableViewer, SWT.NONE);
-		colFirstName.getColumn().setWidth(200);
+		colFirstName.getColumn().setWidth(180);
 		colFirstName.getColumn().setText("Firstname");
 		colFirstName.setLabelProvider(new ColumnLabelProvider() {
 		  @Override
@@ -81,7 +67,7 @@ public class AddressListPart implements ChangeListener {
 		});		
 		
 		TableViewerColumn colLastName = new TableViewerColumn(tableViewer, SWT.NONE);
-		colLastName.getColumn().setWidth(200);
+		colLastName.getColumn().setWidth(180);
 		colLastName.getColumn().setText("Lastname");
 		colLastName.setLabelProvider(new ColumnLabelProvider() {
 		  @Override
@@ -92,13 +78,24 @@ public class AddressListPart implements ChangeListener {
 		});	
 		
 		TableViewerColumn colGender = new TableViewerColumn(tableViewer, SWT.NONE);
-		colGender.getColumn().setWidth(200);
+		colGender.getColumn().setWidth(40);
 		colGender.getColumn().setText("Gender");
 		colGender.setLabelProvider(new ColumnLabelProvider() {
 		  @Override
 		  public String getText(Object element) {
 		    Address p = (Address) element;
 		    return p.getGender();
+		  }
+		});	
+		
+		TableViewerColumn colMarried = new TableViewerColumn(tableViewer, SWT.NONE);
+		colMarried.getColumn().setWidth(40);
+		colMarried.getColumn().setText("Married");
+		colMarried.setLabelProvider(new ColumnLabelProvider() {
+		  @Override
+		  public String getText(Object element) {
+		    Address p = (Address) element;
+		    return String.valueOf(p.isMarried());
 		  }
 		});	
 	}
