@@ -6,6 +6,7 @@
         <children xsi:type="basic:PartSashContainer" xmi:id="_6wlLksgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.partsashcontainer.sample">
           <children xsi:type="basic:PartStack" xmi:id="_6wlLk8gZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.partstack.sample">
             <children xsi:type="basic:Part" xmi:id="_6wlLlMgZEeSyMNYR5xypkQ" elementId="de.geyer-tobias.performance.demoapp.part.sample" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.parts.AddressListPart" label="Address List"/>
+            <children xsi:type="basic:Part" xmi:id="_Yt3ToHfwEeacs6Ul-gicEg" elementId="de.geyer-tobias.performance.demoapp.part.addaddress" contributionURI="bundleclass://de.geyer-tobias.performance.demoapp/de.geyertobias.performance.demoapp.parts.AddAddressPart" label="Add Address"/>
           </children>
         </children>
       </children>
