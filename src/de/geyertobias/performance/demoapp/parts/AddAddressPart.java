@@ -12,8 +12,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
+
+import de.geyertobias.performance.demoapp.model.ModelProvider;
 
 public class AddAddressPart {
 
@@ -21,6 +24,7 @@ public class AddAddressPart {
 	private Text lastNameInput;
 	private Text genderInput;
 	private Button addAddress;
+	private Button marriedButton;
 
 	@Inject
 	private MDirtyable dirty;
@@ -30,9 +34,11 @@ public class AddAddressPart {
 		parent.setLayout(new GridLayout(2, false));
 		
 		//TODO: add labels!
+		Label firstNameLabel = new Label(parent, SWT.NONE);
+		firstNameLabel.setText("First name: ");
 
 		firstNameInput = new Text(parent, SWT.BORDER);
-		firstNameInput.setMessage("First name");
+//		firstNameInput.setMessage("First name");
 //		firstNameInput.addModifyListener(new ModifyListener() {
 //			@Override
 //			public void modifyText(ModifyEvent e) {
@@ -41,8 +47,11 @@ public class AddAddressPart {
 //		});
 		firstNameInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
+		Label lastNameLabel = new Label(parent, SWT.NONE);
+		lastNameLabel.setText("Last name: ");
+		
 		lastNameInput = new Text(parent, SWT.BORDER);
-		lastNameInput.setMessage("Last name");
+//		lastNameInput.setMessage("Last name");
 //		firstNameInput.addModifyListener(new ModifyListener() {
 //			@Override
 //			public void modifyText(ModifyEvent e) {
@@ -51,8 +60,11 @@ public class AddAddressPart {
 //		});
 		lastNameInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
+		Label genderLabel = new Label(parent, SWT.NONE);
+		genderLabel.setText("Gender: ");
+		
 		genderInput = new Text(parent, SWT.BORDER);
-		genderInput.setMessage("Gender");
+		genderInput.setMessage("Male / Female / Other");
 //		firstNameInput.addModifyListener(new ModifyListener() {
 //			@Override
 //			public void modifyText(ModifyEvent e) {
@@ -60,6 +72,19 @@ public class AddAddressPart {
 //			}
 //		});
 		genderInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		Label marriedLabel = new Label(parent, SWT.NONE);
+		marriedLabel.setText("Married: ");
+		
+		marriedButton = new Button(parent, SWT.CHECK);
+//		firstNameInput.addModifyListener(new ModifyListener() {
+//			@Override
+//			public void modifyText(ModifyEvent e) {
+//				dirty.setDirty(true);
+//			}
+//		});
+		marriedButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
 		
 		addAddress = new Button(parent, SWT.PUSH);
 		addAddress.setText("Add to list");
@@ -68,6 +93,9 @@ public class AddAddressPart {
 		        switch (e.type) {
 		        case SWT.Selection:
 		          System.out.println("Button pressed");
+		          ModelProvider modelProvider = ModelProvider.INSTANCE;
+					modelProvider.addAddressWithUndo(firstNameInput.getText(), lastNameInput.getText(), genderInput.getText(), marriedButton.getSelection());
+					modelProvider.refreshUI();
 		          break;
 		        }
 		      }

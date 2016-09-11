@@ -47,7 +47,7 @@ public class CSVLoader {
 			while ((line = br.readLine()) != null) {
 				String[] parsedLine = parseLine(line);
 				if (parsedLine.length == 4) {
-					modelProvider.addAddressFromOpenFile(parsedLine[0], parsedLine[1], parsedLine[2],
+					modelProvider.addAddressWithoutUndo(parsedLine[0], parsedLine[1], parsedLine[2],
 							Boolean.getBoolean(parsedLine[3]));
 				}
 			}
@@ -65,7 +65,7 @@ public class CSVLoader {
 			while ((line = br.readLine()) != null) {
 				String[] parsedLine = parseLine(line);
 				if (parsedLine.length == 4) {
-					modelProvider.addAddressFromOpenFile(parsedLine[0], parsedLine[1], parsedLine[2],
+					modelProvider.addAddressWithoutUndo(parsedLine[0], parsedLine[1], parsedLine[2],
 							Boolean.getBoolean(parsedLine[3]));
 					modelProvider.refreshUI();
 				}
@@ -83,7 +83,7 @@ public class CSVLoader {
 			while ((line = br.readLine()) != null) {
 				String[] parsedLine = parseLine(line);
 				if (parsedLine.length == 4) {
-					modelProvider.addAddress(parsedLine[0], parsedLine[1], parsedLine[2],
+					modelProvider.addAddressWithUndo(parsedLine[0], parsedLine[1], parsedLine[2],
 							Boolean.getBoolean(parsedLine[3]));
 				}
 			}

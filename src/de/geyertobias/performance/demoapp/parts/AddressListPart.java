@@ -130,6 +130,10 @@ public class AddressListPart implements ChangeListener {
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		refresh();
+		if(e instanceof DirtyEvent) {
+			dirty.setDirty(true);
+		} else {
+			refresh();
+		}
 	}
 }

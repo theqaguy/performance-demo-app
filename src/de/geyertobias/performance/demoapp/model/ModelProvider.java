@@ -8,6 +8,8 @@ import javax.swing.event.ChangeListener;
 
 import org.eclipse.core.runtime.Platform;
 
+import de.geyertobias.performance.demoapp.parts.DirtyEvent;
+
 public enum ModelProvider {
 	INSTANCE;
 
@@ -36,7 +38,7 @@ public enum ModelProvider {
 		return addresses;
 	}
 
-	public void addAddress(String firstname, String lastname, String gender, boolean married) {
+	public void addAddressWithUndo(String firstname, String lastname, String gender, boolean married) {
 		Address address = new Address(firstname, lastname, gender, married);
 		if(causeOOME) {
 			undoStack.add(new UndoElement(addresses, address));
@@ -46,10 +48,11 @@ public enum ModelProvider {
 		addresses.add(address);
 		for (ChangeListener listener : changeListeners) {
 			listener.stateChanged(new ChangeEvent("refresh"));
+			listener.stateChanged(new DirtyEvent("dirty"));
 		}
 	}
 
-	public void addAddressFromOpenFile(String firstname, String lastname, String gender, boolean married) {
+	public void addAddressWithoutUndo(String firstname, String lastname, String gender, boolean married) {
 		Address address = new Address(firstname, lastname, gender, married);
 		addresses.add(address);
 	}
