@@ -17,6 +17,7 @@ public enum ModelProvider {
 	private List<ChangeListener> changeListeners;
 	private List<UndoElement> undoStack;
 	private boolean causeOOME = false;
+	private boolean highAlloc = false;
 
 	private ModelProvider() {
 		String[] args = Platform.getApplicationArgs();
@@ -24,6 +25,9 @@ public enum ModelProvider {
 		for (String arg : args) {
 			if (arg.equals("OOME")) {
 				this.causeOOME = true;
+			}
+			if (arg.equals("ALLOC")) {
+				this.highAlloc = true;
 			}
 		}
 
@@ -40,15 +44,17 @@ public enum ModelProvider {
 
 	public void addAddressWithUndo(String firstname, String lastname, String gender, boolean married) {
 		Address address = new Address(firstname, lastname, gender, married);
-		if(causeOOME) {
+		if(causeOOME || highAlloc) {
 			undoStack.add(new UndoElement(addresses, address));
 		} else {
 			undoStack.add(new UndoElement(address));
 		}
 		addresses.add(address);
-		for (ChangeListener listener : changeListeners) {
-			listener.stateChanged(new ChangeEvent("refresh"));
-			listener.stateChanged(new DirtyEvent("dirty"));
+		if(!highAlloc) {
+			for (ChangeListener listener : changeListeners) {
+				listener.stateChanged(new ChangeEvent("refresh"));
+				listener.stateChanged(new DirtyEvent("dirty"));
+			}
 		}
 	}
 
@@ -69,6 +75,10 @@ public enum ModelProvider {
 
 	public void clearAddresses() {
 		addresses = new ArrayList<>();
+	}
+
+	public void clearUndoStack() {
+		undoStack.clear();
 	}
 
 }

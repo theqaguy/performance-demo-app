@@ -16,6 +16,7 @@ public class CSVLoader {
 	ArrayList<String[]> parsedLines;
 	boolean causeOOME = false;
 	boolean highCPUload = false;
+	boolean highAlloc = false;
 
 	public CSVLoader() {
 		String[] args = Platform.getApplicationArgs();
@@ -27,6 +28,9 @@ public class CSVLoader {
 			if (arg.equals("CPULOAD")) {
 				this.highCPUload = true;
 			}
+			if (arg.equals("ALLOC")) {
+				this.highAlloc = true;
+			}
 		}
 	}
 
@@ -36,6 +40,8 @@ public class CSVLoader {
 			importFileWithOOME(selectedFile, modelProvider);
 		} else if (highCPUload) {
 			importFileHighCPULoad(selectedFile, modelProvider);
+		} else if (highAlloc) {
+			importFileWithHighAlloc(selectedFile, modelProvider);
 		} else {
 			importFileHighPerformance(selectedFile, modelProvider);
 		}
@@ -75,6 +81,25 @@ public class CSVLoader {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace().toString());
 		}
+	}
+	
+	private void importFileWithHighAlloc(String selectedFile, ModelProvider modelProvider) {
+		try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+			String line;
+			while ((line = br.readLine()) != null) {
+				String[] parsedLine = parseLine(line);
+				if (parsedLine.length == 4) {
+					modelProvider.addAddressWithUndo(parsedLine[0], parsedLine[1], parsedLine[2],
+							Boolean.getBoolean(parsedLine[3]));
+					modelProvider.clearUndoStack();
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("Reading the file failed with an exception:");
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace().toString());
+		}
+		modelProvider.refreshUI();
 	}
 
 	private void importFileWithOOME(String selectedFile, ModelProvider modelProvider) {
