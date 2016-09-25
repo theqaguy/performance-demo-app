@@ -1,5 +1,6 @@
 package de.geyertobias.performance.demoapp.model;
 
+import java.rmi.activation.UnknownGroupException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +80,29 @@ public enum ModelProvider {
 
 	public void clearUndoStack() {
 		undoStack.clear();
+	}
+
+	public boolean canUndo() {
+		return !undoStack.isEmpty();
+	}
+
+	public void undo() {
+		UndoElement undoElement = undoStack.get(undoStack.size()-1);
+		if(undoElement.getPreviousState() != null) {
+			addresses = undoElement.getPreviousState();
+		} else {
+			int elementToRemove = -1;
+			for(int i = 0; i < addresses.size(); i++) {
+				Address address = addresses.get(i);
+				if(address.hashCode() == undoElement.getHashCodeToRemove()) {
+					elementToRemove = i;
+					break;
+				}
+			}
+			addresses.remove(elementToRemove);
+		}
+		undoStack.remove(undoElement);
+		refreshUI();
 	}
 
 }

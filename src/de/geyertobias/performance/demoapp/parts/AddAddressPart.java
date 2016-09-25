@@ -33,31 +33,16 @@ public class AddAddressPart {
 	public void createComposite(Composite parent) {
 		parent.setLayout(new GridLayout(2, false));
 		
-		//TODO: add labels!
 		Label firstNameLabel = new Label(parent, SWT.NONE);
 		firstNameLabel.setText("First name: ");
 
 		firstNameInput = new Text(parent, SWT.BORDER);
-//		firstNameInput.setMessage("First name");
-//		firstNameInput.addModifyListener(new ModifyListener() {
-//			@Override
-//			public void modifyText(ModifyEvent e) {
-//				dirty.setDirty(true);
-//			}
-//		});
 		firstNameInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label lastNameLabel = new Label(parent, SWT.NONE);
 		lastNameLabel.setText("Last name: ");
 		
 		lastNameInput = new Text(parent, SWT.BORDER);
-//		lastNameInput.setMessage("Last name");
-//		firstNameInput.addModifyListener(new ModifyListener() {
-//			@Override
-//			public void modifyText(ModifyEvent e) {
-//				dirty.setDirty(true);
-//			}
-//		});
 		lastNameInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label genderLabel = new Label(parent, SWT.NONE);
@@ -65,24 +50,12 @@ public class AddAddressPart {
 		
 		genderInput = new Text(parent, SWT.BORDER);
 		genderInput.setMessage("Male / Female / Other");
-//		firstNameInput.addModifyListener(new ModifyListener() {
-//			@Override
-//			public void modifyText(ModifyEvent e) {
-//				dirty.setDirty(true);
-//			}
-//		});
 		genderInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Label marriedLabel = new Label(parent, SWT.NONE);
 		marriedLabel.setText("Married: ");
 		
 		marriedButton = new Button(parent, SWT.CHECK);
-//		firstNameInput.addModifyListener(new ModifyListener() {
-//			@Override
-//			public void modifyText(ModifyEvent e) {
-//				dirty.setDirty(true);
-//			}
-//		});
 		marriedButton.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		
@@ -92,7 +65,6 @@ public class AddAddressPart {
 		      public void handleEvent(Event e) {
 		        switch (e.type) {
 		        case SWT.Selection:
-		          System.out.println("Button pressed");
 		          ModelProvider modelProvider = ModelProvider.INSTANCE;
 					modelProvider.addAddressWithUndo(firstNameInput.getText(), lastNameInput.getText(), genderInput.getText(), marriedButton.getSelection());
 					modelProvider.refreshUI();
