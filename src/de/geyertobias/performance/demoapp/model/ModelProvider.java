@@ -89,7 +89,8 @@ public enum ModelProvider {
 	public void undo() {
 		UndoElement undoElement = undoStack.get(undoStack.size()-1);
 		if(undoElement.getPreviousState() != null) {
-			addresses = undoElement.getPreviousState();
+			addresses.clear();
+			addresses.addAll(undoElement.getPreviousState());
 		} else {
 			int elementToRemove = -1;
 			for(int i = 0; i < addresses.size(); i++) {

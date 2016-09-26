@@ -1,5 +1,6 @@
 package de.geyertobias.performance.demoapp.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UndoElement {
@@ -9,7 +10,8 @@ public class UndoElement {
 	private String toString;
 
 	public UndoElement(List<Address> addresses, Address toRemove) {
-		previousState = addresses;
+		previousState = new ArrayList<>();
+		previousState.addAll(addresses);
 		hashCodeToRemove = toRemove.hashCode();
 		StringBuilder sb = new StringBuilder();
 		for(Address address: addresses) {
